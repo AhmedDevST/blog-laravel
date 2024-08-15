@@ -13,11 +13,19 @@
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light p-2">
-        <a class="navbar-brand " href="#">Blog</a>
-        <div class="collapse navbar-collapse">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Blog</a>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <!-- Centered Search Bar -->
+                <form class="d-flex w-50" method="GET" action="{{ route('posts.search') }}">
+                    @csrf
+                    <input name="paramSearch" class="form-control me-2" type="search" placeholder="Search"
+                        aria-label="Search">
+                </form>
+            </div>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('posts.index') }}">all post</a>
+                    <a class="nav-link" href="{{ route('posts.index') }}">All Posts</a>
                 </li>
             </ul>
         </div>
