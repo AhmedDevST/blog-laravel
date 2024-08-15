@@ -27,12 +27,13 @@ class PostController extends Controller
     }
     public function show(Post $post)
     {
-       // $singlePost = Post::findOrFail($PostId);//model object
+       // $singlePost = Post::findOrFail($post);//model object
         //$singlePost = Post::where("id", $PostId)->first();//model object
         // $singlePost = Post::where("id", $PostId)->get(); //collection object
         // if (is_null($singlePost))
         //   return to_route("posts.index");
-        return view("posts.show", ["post" => $post]);
+        $users = User::all();
+        return view("posts.show", ["post" => $post,"users"=> $users]);
     }
 
     public function store()
