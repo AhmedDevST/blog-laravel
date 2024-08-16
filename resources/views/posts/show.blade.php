@@ -13,12 +13,21 @@
                 <div class="card-header">
                     Info Post
                 </div>
-                <div class="card-body">
-                    <h5 class="card-title">Title: {{ $post->title }}</h5>
-                    <p class="card-text">description :{{ $post->description }}.</p>
-                    <p class="card-text"><small class="text-muted">Posted at: {{ $post['created_at'] }}</small></p>
+                <div class="card-body d-flex justify-content-between">
+                    <div>
+                        <h5 class="card-title">Title: {{ $post->title }}</h5>
+                        <p class="card-text">Description: {{ $post->description }}.</p>
+                        <p class="card-text"><small class="text-muted">Posted at: {{ $post['created_at'] }}</small></p>
+                    </div>
+                    <div>
+                        @if ($post->image)
+                            <img class="img-fluid" style="border-radius: 8px; width: 250px; height: 200px;"
+                                src="{{ asset('storage/' . $post->image) }}" alt="Image">
+                        @endif
+                    </div>
                 </div>
             </div>
+
 
             <!-- Card 2: About Author -->
             <div class="card">

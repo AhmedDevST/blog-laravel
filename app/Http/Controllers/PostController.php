@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PostRequest;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
@@ -37,20 +38,15 @@ class PostController extends Controller
         return view("posts.show", ["post" => $post, "users" => $users]);
     }
 
-    public function store()
+    public function store(PostRequest $request)
     {
-        //validate data
-        request()->validate([
-            "title" => ["required", "min:3"],
-            "description" => ["required", "min:5"],
-            "created_by" => ["required", "exists:users,id"],
-        ]);
         //get data
         //$data= request()->all();
         //dd($data);
-        $title = request()->title;
-        $description = request()->description;
-        $PostCreator = request()->created_by;
+        $title = $request->title;
+        $description = $request->description;
+        $PostCreator = $request->created_by;
+        $path = $request->file('image')->store('images', 'public');
         //dd("post creator : ".$PostCreator." title : ".$title." description :".$description."");
 
         //store in database
@@ -63,23 +59,19 @@ class PostController extends Controller
         $post = Post::create([
             'title' => $title,
             'description' => $description,
-            'user_id' => $PostCreator
+            'user_id' => $PostCreator,
+            'image'=> $path
         ]);
+        session()->flash('success','post add successufly');
         //redirect
         return to_route("posts.index");
     }
-    public function update($PostId)
+    public function update($PostId,PostRequest $request)
     {
-        //validate data
-        request()->validate([
-            "title" => ["required", "min:3"],
-            "description" => ["required", "min:5"],
-            "created_by" => ["required", "exists:users,id"],
-        ]);
         //get data
-        $title = request()->title;
-        $description = request()->description;
-        $PostCreator = request()->created_by;
+        $title = $request->title;
+        $description = $request->description;
+        $PostCreator = $request->created_by;
         // dd("post creator : ".$PostCreator." title : ".$title." description :".$description."");
         //update in database
         $post = Post::find($PostId);

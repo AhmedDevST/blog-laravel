@@ -1,10 +1,10 @@
 @extends('layoutes.app')
 @section('title', 'edit')
 @section('content')
-        @if ($errors->any())
-            <x-alert :errors="$errors" />
-        @endif
-    <form method="POST" action="{{ route('posts.update', $post->id) }}">
+    @if ($errors->any())
+        <x-alert :errors="$errors" />
+    @endif
+    <form method="POST" enctype="multipart/form-data" action="{{ route('posts.update', $post->id) }}">
         @csrf
         @method('PUT')
         <!-- Input Field -->
@@ -29,6 +29,22 @@
                     <option value="-1">No creators</option>
                 @endforelse
             </select>
+        </div>
+        <div class="form-group mb-3">
+            <label for="image">Current Image:</label>
+            <div>
+                @if ($post->image)
+                    <img src="{{ asset('storage/' . $post->image) }}" alt="Current Image"
+                        style="border-radius: 8px; width: 150px; height: 100px;">
+                @else
+                    No image available
+                @endif
+            </div>
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="image">Upload New Image:</label>
+            <input type="file" name="image" class="form-control">
         </div>
         <!-- Submit Button -->
         <button type="submit" class="btn btn-primary">Update</button>

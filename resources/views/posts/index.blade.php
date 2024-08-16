@@ -1,14 +1,15 @@
    @extends('layoutes.app')
    @section('title', 'index')
    @section('content')
-       <!-- Main Content -->
-
+       @include('partials.flashBag')
        <!-- Centered Button -->
        <div class="row justify-content-center ">
            <a href="{{ route('posts.create') }}" class="btn btn-success w-25">Create</a>
        </div>
        <!-- Table at the bottom -->
        <div class="row mt-5">
+           <!-- Pagination Links ( add some code to App\Providers\AppServiceProvider) -->
+           {{ $posts->links() }}
            <table class="table table-striped">
                <thead>
                    <tr>
@@ -47,14 +48,7 @@
            </table>
 
 
-    <!-- Pagination Links  -->
-           <div class="d-flex justify-content-center mt-4">
-            {{ $posts->links('pagination::bootstrap-4') }}
-        </div>
-       
-           <!-- Pagination Links ( add some code to App\Providers\AppServiceProvider) -->
-           <div class="d-flex justify-content-center mt-4">
-            {{ $posts->links() }}
-        </div>
+           <!-- Pagination Links  -->
+           {{ $posts->links('pagination::bootstrap-4') }}
        </div>
    @endsection
