@@ -21,7 +21,7 @@
                </thead>
                <tbody>
 
-                   @forelse ($postes as $post)
+                   @forelse ($posts as $post)
                        <tr>
                            <td>{{ $post->id }}</td>
                            <td>{{ $post->title }}</td>
@@ -45,5 +45,16 @@
                    @endforelse
                </tbody>
            </table>
+
+
+    <!-- Pagination Links  -->
+           <div class="d-flex justify-content-center mt-4">
+            {{ $posts->links('pagination::bootstrap-4') }}
+        </div>
+       
+           <!-- Pagination Links ( add some code to App\Providers\AppServiceProvider) -->
+           <div class="d-flex justify-content-center mt-4">
+            {{ $posts->links() }}
+        </div>
        </div>
    @endsection
