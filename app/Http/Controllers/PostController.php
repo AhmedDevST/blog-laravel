@@ -109,8 +109,8 @@ class PostController extends Controller
         })->orwhere('title', 'like', '%' . request()->paramSearch . '%')
             ->orWhere('description', 'like', '%' . request()->paramSearch . '%')
             ->orWhere('created_at', 'like', '%' . request()->paramSearch . '%')
-            ->get();
-        return view('posts.index', ['postes' => $posts]);
+            ->paginate(5);
+        return view('posts.index', ['posts' => $posts]);
     }
     public function destroy($PostId)
     {
