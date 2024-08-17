@@ -46,7 +46,12 @@ class PostController extends Controller
         $title = $request->title;
         $description = $request->description;
         $PostCreator = $request->created_by;
-        $path = $request->file('image')->store('images', 'public');
+        // Check if the request has a file and store it
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('images', 'public');
+        } else {
+            $path = null; // Or handle it differently if needed
+        }
         //dd("post creator : ".$PostCreator." title : ".$title." description :".$description."");
 
         //store in database
@@ -60,22 +65,29 @@ class PostController extends Controller
             'title' => $title,
             'description' => $description,
             'user_id' => $PostCreator,
-            'image'=> $path
+            'image' => $path
         ]);
-        session()->flash('success','post add successufly');
+        session()->flash('success', 'post add successufly');
         //redirect
         return to_route("posts.index");
     }
-    public function update($PostId,PostRequest $request)
+    public function update($PostId, PostRequest $request)
     {
         //get data
         $title = $request->title;
         $description = $request->description;
         $PostCreator = $request->created_by;
+
         // dd("post creator : ".$PostCreator." title : ".$title." description :".$description."");
         //update in database
         $post = Post::find($PostId);
 
+        // Check if the request has a file and store it
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('images', 'public');
+        } else {
+            $path = $post->image;
+        }
         // $post->title = $title;
         //$post->description = $description;
         //$post->user_id = $PostCreator;
@@ -84,7 +96,8 @@ class PostController extends Controller
         $post->update([
             "title" => $title,
             "description" => $description,
-            'user_id' => $PostCreator
+            'user_id' => $PostCreator,
+            'image' => $path
         ]);
         //redirect
         return to_route('posts.show', $PostId);

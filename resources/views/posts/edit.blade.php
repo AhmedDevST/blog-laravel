@@ -31,18 +31,6 @@
             </select>
         </div>
         <div class="form-group mb-3">
-            <label for="image">Current Image:</label>
-            <div>
-                @if ($post->image)
-                    <img src="{{ asset('storage/' . $post->image) }}" alt="Current Image"
-                        style="border-radius: 8px; width: 150px; height: 100px;">
-                @else
-                    No image available
-                @endif
-            </div>
-        </div>
-
-        <div class="form-group mb-3">
             <label for="image">Upload New Image:</label>
             <input type="file" name="image" class="form-control">
         </div>

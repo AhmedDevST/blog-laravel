@@ -20,10 +20,8 @@
                         <p class="card-text"><small class="text-muted">Posted at: {{ $post['created_at'] }}</small></p>
                     </div>
                     <div>
-                        @if ($post->image)
                             <img class="img-fluid" style="border-radius: 8px; width: 250px; height: 200px;"
                                 src="{{ asset('storage/' . $post->image) }}" alt="Image">
-                        @endif
                     </div>
                 </div>
             </div>
@@ -57,7 +55,7 @@
                             </ul>
                         </div>
                     @endif
-                    <form method="POST" action="{{ route('comments.store', $post->id) }}">
+                    <form method="POST" action="{{ route('posts.comments.store', $post->id) }}">
                         @csrf
                         <div class="mb-3">
                             <label for="authorSelect" class="form-label">user</label>
@@ -94,7 +92,7 @@
                                         </h5>
                                         {{ $comment->description_comment }}
                                     </div>
-                                    <form action="{{ route('comments.destroy', $comment->id) }}" method="POST">
+                                    <form action="{{ route('posts.comments.destroy', $comment->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit"
