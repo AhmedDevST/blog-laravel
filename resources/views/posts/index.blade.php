@@ -30,13 +30,17 @@
                            <td>{{ $post->created_at->format('Y-m-d') }}</td>
                            <td>
                                <a href="{{ route('posts.show', $post->id) }}" class="btn btn-info btn-md">View </a>
-                               <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-secondary btn-md">Edit</a>
+                               @can('update', $post)
+                                   <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-secondary btn-md">Edit</a>
+                               @endcan
+                               @can('delete',$post)
                                <form method="POST" action="{{ route('posts.destroy', $post->id) }}" class="d-inline">
-                                   @csrf
-                                   @method('delete')
-                                   <button type="submit" class="btn btn-danger btn-md"
-                                       onclick="return confirm('Are you sure you want to delete this post?')">Delete</button>
-                               </form>
+                                @csrf
+                                @method('delete')
+                                <button type="submit" class="btn btn-danger btn-md"
+                                    onclick="return confirm('Are you sure you want to delete this post?')">Delete</button>
+                            </form>
+                               @endcan
                            </td>
                        </tr>
                    @empty

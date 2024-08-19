@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class CommentController extends Controller
 {
@@ -31,6 +32,7 @@ class CommentController extends Controller
     public function destroy($commentId)
     {
         $comment = Comment::find($commentId);
+        Gate::authorize('delete', $comment);
         $postid = $comment->post_id;
         $comment->delete();
         return to_route('posts.show', $postid);

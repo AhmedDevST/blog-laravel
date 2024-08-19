@@ -20,8 +20,8 @@
                         <p class="card-text"><small class="text-muted">Posted at: {{ $post['created_at'] }}</small></p>
                     </div>
                     <div>
-                            <img class="img-fluid" style="border-radius: 8px; width: 250px; height: 200px;"
-                                src="{{ asset('storage/' . $post->image) }}" alt="Image">
+                        <img class="img-fluid" style="border-radius: 8px; width: 250px; height: 200px;"
+                            src="{{ asset('storage/' . $post->image) }}" alt="Image">
                     </div>
                 </div>
             </div>
@@ -92,15 +92,17 @@
                                         </h5>
                                         {{ $comment->description_comment }}
                                     </div>
-                                    <form action="{{ route('posts.comments.destroy', $comment->id) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit"
-                                            onclick="return confirm('Are you sure you want to delete this comment?')"
-                                            class="btn btn-link text-danger">
-                                            <i class="fas fa-trash text-danger fa-lg"></i>
-                                        </button>
-                                    </form>
+                                    @can('delete', $comment)
+                                        <form action="{{ route('posts.comments.destroy', $comment->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit"
+                                                onclick="return confirm('Are you sure you want to delete this comment?')"
+                                                class="btn btn-link text-danger">
+                                                <i class="fas fa-trash text-danger fa-lg"></i>
+                                            </button>
+                                        </form>
+                                    @endcan
                                 </div>
                             </div>
 

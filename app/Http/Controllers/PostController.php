@@ -7,6 +7,7 @@ use App\Models\Post;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class PostController extends Controller
 {
@@ -24,6 +25,7 @@ class PostController extends Controller
 
     public function edit(Post $post)
     {
+        Gate::authorize('update', $post);
         $creators = User::all();
         return view("posts.edit", ["post" => $post, "creators" => $creators]);
     }
@@ -81,6 +83,7 @@ class PostController extends Controller
         // dd("post creator : ".$PostCreator." title : ".$title." description :".$description."");
         //update in database
         $post = Post::find($PostId);
+        Gate::authorize('update', $post);
 
         // Check if the request has a file and store it
         if ($request->hasFile('image')) {
@@ -116,6 +119,7 @@ class PostController extends Controller
     {
         //delete from database
         $post = Post::find($PostId);
+        Gate::authorize('delete', $post);
         $post->delete();
         return to_route('posts.index');
     }
