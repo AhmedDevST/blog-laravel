@@ -57,16 +57,6 @@
                     @endif
                     <form method="POST" action="{{ route('posts.comments.store', $post->id) }}">
                         @csrf
-                        <div class="mb-3">
-                            <label for="authorSelect" class="form-label">user</label>
-                            <select class="form-select" id="authorSelect" name="user_comment">
-                                @forelse ($users as $user)
-                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
-                                @empty
-                                    <option value="-1">No users</option>
-                                @endforelse
-                            </select>
-                        </div>
                         <div class="form-group mb-2">
                             <label for="commentTextarea">Comment</label>
                             <textarea name="description_comment" class="form-control" id="commentTextarea" rows="3"

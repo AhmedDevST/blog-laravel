@@ -31,8 +31,8 @@ class PostPolicy
      */
     public function create(User $user): bool
     {
-        //
-        return true;
+        // Allow users with 'Admin' or 'Editor' roles to create posts
+        return $user->hasRole('Admin') || $user->hasRole('Editor');
     }
 
     /**
@@ -40,8 +40,8 @@ class PostPolicy
      */
     public function update(User $user, Post $post): bool
     {
-        //
-        return $user->id === $post->user_id;
+        // Allow users with 'Admin' role or the post creator to update the post
+        return $user->hasRole('Admin') || ($user->id === $post->user_id);
     }
 
     /**
@@ -49,17 +49,13 @@ class PostPolicy
      */
     public function delete(User $user, Post $post): bool
     {
-        //
-        return $user->id === $post->user_id;
+        // Check if the user has the 'Admin' role
+        return $user->hasRole('Admin');
     }
-
-    /**
-     * Determine whether the user can restore the model.
-     */
     public function restore(User $user, Post $post): bool
     {
-        //
-        return $user->id === $post->user_id;
+        // Allow only the post creator or 'Admin' to restore posts
+        return $user->hasRole('Admin') || $user->id === $post->user_id;
     }
 
     /**
@@ -67,7 +63,7 @@ class PostPolicy
      */
     public function forceDelete(User $user, Post $post): bool
     {
-        //
-        return $user->id === $post->user_id;
+        // Allow only 'Admin' to permanently delete posts
+        return $user->hasRole('Admin');
     }
 }

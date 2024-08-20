@@ -21,14 +21,9 @@
         </div>
 
         <div class="mb-3">
-            <label for="authorSelect" class="form-label">Post creator</label>
-            <select class="form-select" id="authorSelect" name="created_by">
-                @forelse ($creators as $creator)
-                    <option @selected($creator->id == $post->user->id) value="{{ $creator->id }}">{{ $creator->name }}</option>
-                @empty
-                    <option value="-1">No creators</option>
-                @endforelse
-            </select>
+            <label for="creator" class="form-label">Creator</label>
+            <input type="text" value="{{ $post->user->name }}" name="creator" class="form-control" id="inputField"
+            disabled/>
         </div>
         <div class="form-group mb-3">
             <label for="image">Upload New Image:</label>

@@ -18,9 +18,9 @@ class PostFactory extends Factory
     public function definition(): array
     {
         return [
-            "title"=> $this->faker->sentence,
+            'title' => $this->faker->sentence,
             'description' => $this->faker->paragraph,
-            'user_id' => User::inRandomOrder()->first()->id,
+            'user_id' => User::whereBetween('id', [4, 13])->inRandomOrder()->first()->id,
         ];
     }
 }

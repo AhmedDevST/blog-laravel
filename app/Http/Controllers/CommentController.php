@@ -9,19 +9,18 @@ use Illuminate\Support\Facades\Gate;
 class CommentController extends Controller
 {
     //
-    public function store($postId)
+    public function store(Request $request, $postId)
     {
         //validate data
-        request()->validate([
-            "user_comment" => ["required", "exists:users,id"],
+        $request->validate([
             "description_comment" => ["required", "min:5"],
         ]);
         //get data
-        $user_comment = request()->user_comment;
-        $description_comment = request()->description_comment;
+        $user_id =$request->user()->id;
+        $description_comment = $request->description_comment;
         //add to db
         $comment = Comment::create([
-            "user_comment" => $user_comment,
+            "user_comment" => $user_id,
             "description_comment" => $description_comment,
             "post_id" => $postId,
         ]);

@@ -24,7 +24,6 @@ class PostRequest extends FormRequest
         return [
             "title" => ["required", "min:3"],
             "description" => ["required", "min:5"],
-            "created_by" => ["required", "exists:users,id"],
            'image' => ['image', 'mimes:jpeg,png,jpg,gif','max:2048'],
         ];
     }

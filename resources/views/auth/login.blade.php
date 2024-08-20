@@ -16,6 +16,11 @@
                 @if ($errors->any())
                     <x-alert :errors="$errors" />
                 @endif
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
                 <div class="card">
                     <div class="card-header text-center bg-primary text-white">
                         <h4>Login</h4>
@@ -41,7 +46,7 @@
                                 <a href="#">Forgot your password?</a>
                             </div>
                             <div class="mt-3 text-center">
-                                <a href="#">Don't have an account? Sign up</a>
+                                <a href="{{ route('register.show') }}">Don't have an account? Sign up</a>
                             </div>
                         </form>
                     </div>

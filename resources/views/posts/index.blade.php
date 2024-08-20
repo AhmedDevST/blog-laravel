@@ -2,14 +2,17 @@
    @section('title', 'index')
    @section('content')
        @include('partials.flashBag')
-       <!-- Centered Button -->
-       <div class="row justify-content-center ">
-           <a href="{{ route('posts.create') }}" class="btn btn-success w-25">Create</a>
-       </div>
+       @role(['Admin', 'Editor'])
+           <!-- Centered Button -->
+           <div class="row justify-content-center ">
+               <a href="{{ route('posts.create') }}" class="btn btn-success w-25">Create</a>
+           </div>
+       @endrole
+
        <!-- Table at the bottom -->
        <div class="row mt-5">
            <!-- Pagination Links ( add some code to App\Providers\AppServiceProvider) -->
-           {{ $posts->links() }}
+           {{ $posts->appends(['paramSearch' => $searchTerm])->links() }}
            <table class="table table-striped">
                <thead>
                    <tr>
@@ -33,13 +36,13 @@
                                @can('update', $post)
                                    <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-secondary btn-md">Edit</a>
                                @endcan
-                               @can('delete',$post)
-                               <form method="POST" action="{{ route('posts.destroy', $post->id) }}" class="d-inline">
-                                @csrf
-                                @method('delete')
-                                <button type="submit" class="btn btn-danger btn-md"
-                                    onclick="return confirm('Are you sure you want to delete this post?')">Delete</button>
-                            </form>
+                               @can('delete', $post)
+                                   <form method="POST" action="{{ route('posts.destroy', $post->id) }}" class="d-inline">
+                                       @csrf
+                                       @method('delete')
+                                       <button type="submit" class="btn btn-danger btn-md"
+                                           onclick="return confirm('Are you sure you want to delete this post?')">Delete</button>
+                                   </form>
                                @endcan
                            </td>
                        </tr>
@@ -53,6 +56,6 @@
 
 
            <!-- Pagination Links  -->
-           {{ $posts->links('pagination::bootstrap-4') }}
+              {{ $posts->appends(['paramSearch' => $searchTerm])->links('pagination::bootstrap-4') }}
        </div>
    @endsection

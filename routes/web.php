@@ -3,7 +3,9 @@
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\RegisterController;
 use App\Http\Middleware\Useless;
+use Illuminate\Foundation\Bootstrap\RegisterProviders;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Route;
 
@@ -14,7 +16,15 @@ Route::get('/', function () {
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', [LoginController::class, 'show'])->name('login.show');
     Route::post('/login', [LoginController::class, 'login'])->name("login");
+    Route::get('/register', [RegisterController::class,'show'])->name('register.show');
+    Route::post('/register', [RegisterController::class,'register'])->name('register');
 });
+
+
+Route::get('/home',function(){
+    return view('posts.home');
+});
+
 
 //route group
 Route::middleware(['auth'])->group(function () {

@@ -14,18 +14,20 @@ class PostController extends Controller
     public function index()
     {
         $PostFromDb = Post::paginate(5);
-        return view("posts.index", ["posts" => $PostFromDb]);
+        return view("posts.index", ["posts" => $PostFromDb ,'searchTerm' => '']);
     }
 
     public function create()
     {
+
+        Gate::authorize("create", Post::class);
         $creators = User::all();
         return view("posts.create", ["creators" => $creators]);
     }
 
     public function edit(Post $post)
     {
-        Gate::authorize('update', $post);
+        Gate::authorize("create", $post);
         $creators = User::all();
         return view("posts.edit", ["post" => $post, "creators" => $creators]);
     }
@@ -47,7 +49,7 @@ class PostController extends Controller
         //dd($data);
         $title = $request->title;
         $description = $request->description;
-        $PostCreator = $request->created_by;
+        $PostCreator = $request->user();
         // Check if the request has a file and store it
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('images', 'public');
@@ -66,7 +68,7 @@ class PostController extends Controller
         $post = Post::create([
             'title' => $title,
             'description' => $description,
-            'user_id' => $PostCreator,
+            'user_id' => $PostCreator->id,
             'image' => $path
         ]);
         session()->flash('success', 'post add successufly');
@@ -78,7 +80,6 @@ class PostController extends Controller
         //get data
         $title = $request->title;
         $description = $request->description;
-        $PostCreator = $request->created_by;
 
         // dd("post creator : ".$PostCreator." title : ".$title." description :".$description."");
         //update in database
@@ -93,28 +94,32 @@ class PostController extends Controller
         }
         // $post->title = $title;
         //$post->description = $description;
-        //$post->user_id = $PostCreator;
+
 
         //$post->save();
         $post->update([
             "title" => $title,
             "description" => $description,
-            'user_id' => $PostCreator,
             'image' => $path
         ]);
         //redirect
         return to_route('posts.show', $PostId);
     }
-    public function search()
+    public function search(Request $request)
     {
-        $posts = Post::whereHas('user', function (Builder $query) {
-            $query->where('name', 'like', '%' . request()->paramSearch . '%');
-        })->orwhere('title', 'like', '%' . request()->paramSearch . '%')
-            ->orWhere('description', 'like', '%' . request()->paramSearch . '%')
-            ->orWhere('created_at', 'like', '%' . request()->paramSearch . '%')
+        $searchTerm = $request->input('paramSearch');  // Get the search term from the query string
+
+        $posts = Post::whereHas('user', function (Builder $query) use ($searchTerm) {
+            $query->where('name', 'like', '%' . $searchTerm . '%');
+        })->orWhere('title', 'like', '%' . $searchTerm . '%')
+            ->orWhere('description', 'like', '%' . $searchTerm . '%')
+            ->orWhere('created_at', 'like', '%' . $searchTerm . '%')
             ->paginate(5);
-        return view('posts.index', ['posts' => $posts]);
+
+        // Pass the search term to the view so it can be preserved
+        return view('posts.index', ['posts' => $posts, 'searchTerm' => $searchTerm]);
     }
+
     public function destroy($PostId)
     {
         //delete from database
