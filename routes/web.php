@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
@@ -21,11 +22,7 @@ Route::middleware(['guest'])->group(function () {
 });
 
 
-Route::get('/home',function(){
-    return view('posts.home');
-});
-
-
+Route::get('/home', [HomeController::class,'index'])->name('home.search');
 //route group
 Route::middleware(['auth'])->group(function () {
     Route::name("posts.")->prefix("posts")->group(function () {

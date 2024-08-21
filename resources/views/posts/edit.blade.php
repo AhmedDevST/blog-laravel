@@ -1,4 +1,4 @@
-@extends('layoutes.app')
+@extends('layouts.app')
 @section('title', 'edit')
 @section('content')
     @if ($errors->any())

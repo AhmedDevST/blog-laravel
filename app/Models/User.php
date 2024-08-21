@@ -32,6 +32,9 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+    public function getImageAttribute($value){
+        return $value ?? 'images/profile.jpg';
+    }
 
     /**
      * Get the attributes that should be cast.

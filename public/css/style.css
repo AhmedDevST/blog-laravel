@@ -1,0 +1,153 @@
+:root {
+    --primary-color: #6a1b9a; /* Deep Violet */
+    --secondary-color: #A76C9D; /* Medium Violet */
+    --background-color: #F8F9FA; /* Off-White */
+    --text-color: #000000; /* Black */
+    --button-color: #FFFFFF; /* Pure White */
+    --button-border-color: #4A0072; /* Deep Violet */
+    --shadow-color: rgba(0, 0, 0, 0.1); /* Shadow Color */
+}
+body {
+    background-color: white;
+}
+a{
+    text-decoration: none;
+}
+header {
+    padding: 5px 0;
+    border-bottom: 1px solid #d3d3d3;
+}
+
+.search-bar {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.text-primary-violet {
+    color:var(--primary-color);
+    /* Example color - Deep Violet */
+}
+
+.footer {
+    background-color: #343a40;
+    color: white;
+    padding: 20px 0;
+    border-top: 1px solid #dee2e6;
+}
+
+.footer a {
+    color: #f8f9fa;
+    margin: 0 10px;
+}
+
+.card {
+    border-radius: 10px;
+    border: none;
+    background-color: white;
+}
+
+.card img {
+    border-radius: 10px 10px 0 0;
+}
+
+.btn-custom {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+}
+
+.btn-custom:hover {
+    background-color:var(--button-border-color);
+    color: var(--button-color);
+}
+/* Define custom outline button style for <a> elements */
+.btn-outline-create-account {
+    display: inline-block;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    background-color: transparent;
+    border-radius: 0.25rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+}
+
+.btn-outline-create-account:hover {
+    color: var(--button-color);
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+/* Define custom violet outline button style */
+.btn-outline-read-more {
+    display: inline-block;
+    padding: 0.375rem 0.75rem; /* Adjust padding for size */
+    font-size: 1rem; /* Font size */
+    font-weight: 400; /* Font weight */
+    text-align: center;
+    text-decoration: none; /* Remove underline */
+    vertical-align: middle;
+    border: 1px solid #4A0072; /* Violet border color */
+    color: #4A0072; /* Violet text color */
+    background-color: transparent; /* Transparent background */
+    border-radius: 20px; /* Border radius */
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+}
+
+.btn-outline-read-more:hover {
+    color: #FFFFFF; /* White text color on hover */
+    background-color: #4A0072; /* Violet background color on hover */
+    border-color: #4A0072; /* Violet border color on hover */
+}
+
+.sidebar-card {
+    margin-bottom: 20px;
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+    position: relative;
+}
+
+.sidebar-card::before {
+    content: "";
+    display: block;
+    height: 5px;
+    background-color: var(--primary-color);
+    /* Line color */
+    border-radius: 10px 10px 0 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.sidebar-card .card-body {
+    position: relative;
+    padding-top: 20px;
+}
+
+.post-card img {
+    border-radius: 10px;
+}
+
+.tag {
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 20px;
+    background-color: #e9ecef;
+    color: #495057;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.tag:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.tags-container {
+    flex-wrap: wrap;
+}

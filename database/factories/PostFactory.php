@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -21,6 +22,7 @@ class PostFactory extends Factory
             'title' => $this->faker->sentence,
             'description' => $this->faker->paragraph,
             'user_id' => User::whereBetween('id', [4, 13])->inRandomOrder()->first()->id,
+            'category_id' => Category::inRandomOrder()->first()->id,
         ];
     }
 }

@@ -1,4 +1,4 @@
-   @extends('layoutes.app')
+   @extends('layouts.app')
    @section('title', 'index')
    @section('content')
        @include('partials.flashBag')
