@@ -7,6 +7,7 @@
             'editors' => $editors,
             'categories' => $categories,
             'tags' => $tags,
+            'recentPosts' =>$recentPosts
         ])
     </div>
 @endsection

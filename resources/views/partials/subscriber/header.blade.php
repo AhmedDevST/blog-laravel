@@ -6,7 +6,7 @@
 
             <div class="col-md-3 text-start">
                 <!-- Link to the home page with no text decoration -->
-                <a href="{{ route('home.search') }}" class="text-decoration-none text-primary-violet">
+                <a href="{{ route('home') }}" class="text-decoration-none text-primary-violet">
                     <h1>Blog Title</h1>
                 </a>
             </div>

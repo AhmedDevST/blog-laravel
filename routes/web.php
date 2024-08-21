@@ -22,7 +22,12 @@ Route::middleware(['guest'])->group(function () {
 });
 
 
-Route::get('/home', [HomeController::class,'index'])->name('home.search');
+Route::get('/home', [HomeController::class,'index'])->name('home');
+Route::get('/home/posts/{post}', [HomeController::class,'show'])->name('home.posts.show');
+Route::get('/home/tags/{tag}', [HomeController::class, 'searchByTags'])->name('home.tag');
+Route::get('/home/search', [HomeController::class,'search'])->name('home.search');
+
+
 //route group
 Route::middleware(['auth'])->group(function () {
     Route::name("posts.")->prefix("posts")->group(function () {

@@ -1,16 +1,16 @@
 :root {
     --primary-color: #6a1b9a; /* Deep Violet */
-    --secondary-color: #A76C9D; /* Medium Violet */
-    --background-color: #F8F9FA; /* Off-White */
+    --secondary-color: #a76c9d; /* Medium Violet */
+    --background-color: #f8f9fa; /* Off-White */
     --text-color: #000000; /* Black */
-    --button-color: #FFFFFF; /* Pure White */
-    --button-border-color: #4A0072; /* Deep Violet */
+    --button-color: #ffffff; /* Pure White */
+    --button-border-color: #4a0072; /* Deep Violet */
     --shadow-color: rgba(0, 0, 0, 0.1); /* Shadow Color */
 }
 body {
     background-color: white;
 }
-a{
+a {
     text-decoration: none;
 }
 header {
@@ -24,8 +24,19 @@ header {
 }
 
 .text-primary-violet {
-    color:var(--primary-color);
+    color: var(--primary-color);
     /* Example color - Deep Violet */
+}
+.post-link {
+    color: black; /* Default color */
+    text-decoration: none;
+    transition: color 0.3s ease; /* Smooth transition for color change */
+}
+
+.post-link:hover,
+.post-link:active {
+    color: var(--primary-color); /* Color on hover */
+    text-decoration: none;
 }
 
 .footer {
@@ -57,7 +68,7 @@ header {
 }
 
 .btn-custom:hover {
-    background-color:var(--button-border-color);
+    background-color: var(--button-border-color);
     color: var(--button-color);
 }
 /* Define custom outline button style for <a> elements */
@@ -73,7 +84,8 @@ header {
     color: var(--primary-color);
     background-color: transparent;
     border-radius: 0.25rem;
-    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+        border-color 0.15s ease-in-out;
 }
 
 .btn-outline-create-account:hover {
@@ -90,17 +102,18 @@ header {
     text-align: center;
     text-decoration: none; /* Remove underline */
     vertical-align: middle;
-    border: 1px solid #4A0072; /* Violet border color */
-    color: #4A0072; /* Violet text color */
+    border: 1px solid #4a0072; /* Violet border color */
+    color: #4a0072; /* Violet text color */
     background-color: transparent; /* Transparent background */
     border-radius: 20px; /* Border radius */
-    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+        border-color 0.15s ease-in-out;
 }
 
 .btn-outline-read-more:hover {
-    color: #FFFFFF; /* White text color on hover */
-    background-color: #4A0072; /* Violet background color on hover */
-    border-color: #4A0072; /* Violet border color on hover */
+    color: #ffffff; /* White text color on hover */
+    background-color: #4a0072; /* Violet background color on hover */
+    border-color: #4a0072; /* Violet border color on hover */
 }
 
 .sidebar-card {
