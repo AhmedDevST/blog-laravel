@@ -24,7 +24,9 @@ class PostRequest extends FormRequest
         return [
             "title" => ["required", "min:3"],
             "description" => ["required", "min:5"],
-           'image' => ['image', 'mimes:jpeg,png,jpg,gif','max:2048'],
+            'image' => ['image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+            'category' => ['nullable' ,'exists:categories,id'],
+            'tags' => ['array', 'min:1','exists:tags,id']
         ];
     }
 }

@@ -16,7 +16,10 @@
                 <div class="card-body d-flex justify-content-between">
                     <div>
                         <h5 class="card-title">Title: {{ $post->title }}</h5>
+                        <p class="card-text">Category: {{ $post->category->name ?? 'No Category' }}.</p>
+
                         <p class="card-text">Description: {{ $post->description }}.</p>
+
                         <p class="card-text"><small class="text-muted">Posted at: {{ $post['created_at'] }}</small></p>
                     </div>
                     <div>
@@ -37,6 +40,24 @@
                     <p class="card-text"><small class="text-muted">email : {{ $post->user->email }} </small></p>
                 </div>
             </div>
+            <!-- Card 3 tags -->
+            <div class="card mt-4">
+                <div class="card-header">
+                    Tags
+                </div>
+                <div class="card-body">
+                    <div class="d-inline">
+                        @forelse($post->tags as $tag)
+                        <x-tag :tag="$tag" />
+                        @empty
+                        <small class="text-muted">No tags</small>
+                        @endforelse 
+                           
+                       
+                    </div>
+                </div>
+            </div>
+
             <!-- Comment Section -->
 
             <div class="card mt-4">

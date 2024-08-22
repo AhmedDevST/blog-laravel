@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PostRequest;
+use App\Models\Category;
 use App\Models\Post;
+use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -14,21 +16,24 @@ class PostController extends Controller
     public function index()
     {
         $PostFromDb = Post::paginate(5);
-        return view("posts.index", ["posts" => $PostFromDb ,'searchTerm' => '']);
+        return view("posts.index", ["posts" => $PostFromDb, 'searchTerm' => '']);
     }
 
     public function create()
     {
         Gate::authorize("create", Post::class);
         $creators = User::all();
-        return view("posts.create", ["creators" => $creators]);
+        $categories = Category::all();
+        $tags = Tag::all();
+        return view("posts.create", ["creators" => $creators, "categories" => $categories, "tags" => $tags]);
     }
 
     public function edit(Post $post)
     {
         Gate::authorize("create", $post);
-        $creators = User::all();
-        return view("posts.edit", ["post" => $post, "creators" => $creators]);
+        $categories = Category::all();
+        $tags = Tag::all();
+        return view("posts.edit", ["post" => $post, "categories" => $categories, "tags" => $tags]);
     }
     public function show(Post $post)
     {
@@ -49,6 +54,7 @@ class PostController extends Controller
         $title = $request->title;
         $description = $request->description;
         $PostCreator = $request->user();
+        $category_id = $request->category;
         // Check if the request has a file and store it
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('images', 'public');
@@ -68,8 +74,13 @@ class PostController extends Controller
             'title' => $title,
             'description' => $description,
             'user_id' => $PostCreator->id,
-            'image' => $path
+            'image' => $path,
+            'category_id' => $category_id
         ]);
+        // Attach selected tags to the post
+        if ($request->has('tags')) {
+            $post->tags()->attach($request->tags);
+        }
         session()->flash('success', 'post add successufly');
         //redirect
         return to_route("posts.index");
@@ -79,7 +90,7 @@ class PostController extends Controller
         //get data
         $title = $request->title;
         $description = $request->description;
-
+        $category_id = $request->category;
         // dd("post creator : ".$PostCreator." title : ".$title." description :".$description."");
         //update in database
         $post = Post::find($PostId);
@@ -99,8 +110,15 @@ class PostController extends Controller
         $post->update([
             "title" => $title,
             "description" => $description,
-            'image' => $path
+            'image' => $path,
+            'category_id' => $category_id
         ]);
+        // Synchronize tags with the post
+        if ($request->has('tags')) {
+            $post->tags()->sync($request->tags); // Use sync to update the tags
+        } else {
+            $post->tags()->sync([]); // Remove all tags if no tags are provided
+        }
         //redirect
         return to_route('posts.show', $PostId);
     }
