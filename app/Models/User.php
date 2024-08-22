@@ -36,6 +36,7 @@ class User extends Authenticatable
         return $value ?? 'images/profile.jpg';
     }
 
+    
     /**
      * Get the attributes that should be cast.
      *

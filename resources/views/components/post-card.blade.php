@@ -5,7 +5,7 @@
             <a href="{{ route('home.posts.show', $post->id) }}" class="post-link">
                 <h5 class="card-title mb-0">{{ $post->title }}</h5>
             </a>
-            <span class="text-muted">{{ $post->category->name }}</span>
+            <span class="text-muted">{{ $post->category->name ?? 'No Category' }}</span>
         </div>
         <p class="card-text">{{ $post->description }}.</p>
         <div class="d-flex justify-content-between align-items-center mb-3">

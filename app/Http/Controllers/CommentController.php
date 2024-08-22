@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
 class CommentController extends Controller
@@ -16,7 +18,7 @@ class CommentController extends Controller
             "description_comment" => ["required", "min:5"],
         ]);
         //get data
-        $user_id =$request->user()->id;
+        $user_id = $request->user()->id;
         $description_comment = $request->description_comment;
         //add to db
         $comment = Comment::create([
@@ -24,16 +26,30 @@ class CommentController extends Controller
             "description_comment" => $description_comment,
             "post_id" => $postId,
         ]);
-        //redirect route
-        return to_route('posts.show', $postId);
+
+        // Redirect based on user role
+        $user = User::find(Auth::user()->id);
+        if ($user->hasRole('Admin') || $user->hasRole('Editor')) {
+            return to_route('posts.show', $postId);
+        } elseif ($user->hasRole('Subscriber')) {
+            return to_route('home.posts.show', $postId);
+        }
+        return to_route("home");
     }
 
     public function destroy($commentId)
     {
         $comment = Comment::find($commentId);
         Gate::authorize('delete', $comment);
-        $postid = $comment->post_id;
+        $postId = $comment->post_id;
         $comment->delete();
-        return to_route('posts.show', $postid);
+        // Redirect based on user role
+        $user = User::find(Auth::user()->id);
+        if ($user->hasRole('Admin') || $user->hasRole('Editor')) {
+            return to_route('posts.show', $postId);
+        } elseif ($user->hasRole('Subscriber')) {
+            return to_route('home.posts.show', $postId);
+        }
+        return to_route("home");
     }
 }

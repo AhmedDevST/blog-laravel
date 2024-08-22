@@ -19,7 +19,6 @@ class PostController extends Controller
 
     public function create()
     {
-
         Gate::authorize("create", Post::class);
         $creators = User::all();
         return view("posts.create", ["creators" => $creators]);
