@@ -16,7 +16,7 @@ class PostController extends Controller
     public function index()
     {
         $PostFromDb = Post::paginate(5);
-        return view("posts.index", ["posts" => $PostFromDb, 'searchTerm' => '']);
+        return view("admin.index", ["posts" => $PostFromDb, 'searchTerm' => '']);
     }
 
     public function create()
@@ -25,7 +25,7 @@ class PostController extends Controller
         $creators = User::all();
         $categories = Category::all();
         $tags = Tag::all();
-        return view("posts.create", ["creators" => $creators, "categories" => $categories, "tags" => $tags]);
+        return view("admin.create", ["creators" => $creators, "categories" => $categories, "tags" => $tags]);
     }
 
     public function edit(Post $post)
@@ -33,7 +33,7 @@ class PostController extends Controller
         Gate::authorize("create", $post);
         $categories = Category::all();
         $tags = Tag::all();
-        return view("posts.edit", ["post" => $post, "categories" => $categories, "tags" => $tags]);
+        return view("admin.edit", ["post" => $post, "categories" => $categories, "tags" => $tags]);
     }
     public function show(Post $post)
     {
@@ -43,7 +43,7 @@ class PostController extends Controller
         // if (is_null($singlePost))
         //   return to_route("posts.index");
         $users = User::all();
-        return view("posts.show", ["post" => $post, "users" => $users]);
+        return view("admin.show", ["post" => $post, "users" => $users]);
     }
 
     public function store(PostRequest $request)
@@ -134,7 +134,7 @@ class PostController extends Controller
             ->paginate(5);
 
         // Pass the search term to the view so it can be preserved
-        return view('posts.index', ['posts' => $posts, 'searchTerm' => $searchTerm]);
+        return view('admin.index', ['posts' => $posts, 'searchTerm' => $searchTerm]);
     }
 
     public function destroy($PostId)
