@@ -12,6 +12,7 @@ Route::get('/', function () {
 });
 
 
+
 //access public
 Route::get('/login', [LoginController::class, 'show'])->name('login.show');
 Route::post('/login', [LoginController::class, 'login'])->name("login");
@@ -37,6 +38,7 @@ Route::middleware(['auth'])->group(function () {
         // Place this at the bottom to ensure custom routes are matched first
         Route::resource('posts', PostController::class);
     });
+
 
     //logout
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
