@@ -51,9 +51,9 @@
                         <x-tag :tag="$tag" />
                         @empty
                         <small class="text-muted">No tags</small>
-                        @endforelse 
-                           
-                       
+                        @endforelse
+
+
                     </div>
                 </div>
             </div>

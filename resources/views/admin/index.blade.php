@@ -11,8 +11,6 @@
 
        <!-- Table at the bottom -->
        <div class="row mt-5">
-           <!-- Pagination Links ( add some code to App\Providers\AppServiceProvider) -->
-           {{ $posts->appends(['paramSearch' => $searchTerm])->links() }}
            <table class="table table-striped">
                <thead>
                    <tr>

@@ -7,10 +7,10 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+//Route::get('/', function () {
+  //  return view('welcome');
+//});
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 
 //access public
@@ -24,7 +24,7 @@ Route::get('/home/posts/{post}', [HomeController::class, 'show'])->name('home.po
 Route::get('/home/tags/{tag}', [HomeController::class, 'searchByTags'])->name('home.tag');
 Route::get('/home/search', [HomeController::class, 'search'])->name('home.search');
 
-//authenticate 
+//authenticate
 Route::middleware(['auth'])->group(function () {
 
     // Comment routes (accessible to subscribers , admins and editors)
@@ -37,6 +37,7 @@ Route::middleware(['auth'])->group(function () {
         // show,index,create,edit,update,store,destroy
         // Place this at the bottom to ensure custom routes are matched first
         Route::resource('posts', PostController::class);
+        
     });
 
 

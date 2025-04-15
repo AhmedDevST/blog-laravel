@@ -65,10 +65,10 @@ class PostController extends Controller
 
         //store in database
         /*$post = new Post;
- 
+
         $post->title = $title;
         $post->description = $description;
- 
+
         $post->save();*/
         $post = Post::create([
             'title' => $title,

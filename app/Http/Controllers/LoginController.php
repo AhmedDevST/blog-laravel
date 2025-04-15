@@ -17,7 +17,7 @@ class LoginController extends Controller
     {
         // Redirect based on user role
         if ($user->hasRole('Admin')  || $user->hasRole('Editor')) {
-            return to_route('admin.index');
+            return to_route('posts.index');
         } elseif ($user->hasRole('Subscriber')) {
             return to_route('home');
         }
