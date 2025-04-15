@@ -1,17 +1,13 @@
+<div class="bg-white rounded-lg shadow-md overflow-hidden mb-6">
+    <div class="p-5">
+        <h5 class="text-lg font-semibold mb-4">Categories</h5>
 
-
-<div class="card sidebar-card mb-3 shadow-sm border-0">
-    <div class="card-body">
-        <h5 class="card-title">Categories</h5>
-
-        @foreach ($categories as $category )
-             <!-- Category Item 1 -->
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <h6 class="card-title mb-0">{{$category->name}}</h6> <!-- Category title -->
-            <span class="badge badge-dark">{{$category->posts_count}}</span> <!-- Number of posts --> 
+        @foreach ($categories as $category)
+        <div class="flex justify-between items-center mb-2">
+            <h6 class="font-medium text-gray-800 m-0">{{$category->name}}</h6>
+            <span class="bg-gray-800 text-white text-xs px-2 py-1 rounded-full">{{$category->posts_count}}</span>
         </div>
-        <!-- Separator with color -->
-        <hr style="border-top: 1px solid #D3D3D3; margin-top: 6px; margin-bottom: 6px;">
+        <div class="border-b border-gray-200 my-2"></div>
         @endforeach
     </div>
 </div>

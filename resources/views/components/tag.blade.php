@@ -1,2 +1,1 @@
-<a href="{{route('home.tag', ['tag' => $tag->name])}}" class="tag">{{$tag->name}}</a>
-         
+<a href="{{route('home.tag', ['tag' => $tag->name])}}" class="inline-block px-3 py-1 bg-gray-100 text-gray-800 text-xs font-medium rounded-full hover:bg-gray-200 transition duration-300">{{$tag->name}}</a>
