@@ -6,7 +6,7 @@
             <!-- Logo - Desktop -->
             <div class="w-1/4 text-left">
                 <a href="{{ route('home') }}" class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 transition duration-300">
-                    <h1 class="text-2xl font-bold tracking-tight">Blog Title</h1>
+                    <h1 class="text-2xl font-bold tracking-tight">Blog</h1>
                 </a>
             </div>
 

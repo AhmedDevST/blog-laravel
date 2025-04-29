@@ -64,3 +64,26 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Features of the Blog Application
+
+- **User Authentication**: Secure login and registration system.
+- **Post Management**: Create, edit, and delete blog posts.
+- **Categories and Tags**: Organize posts with categories and tags.
+- **Comments**: Allow users to comment on posts.
+- **Image Uploads**: Upload and display images for posts.
+- **Role-Based Access Control**: Manage permissions for different user roles.
+- **Responsive Design**: Fully responsive UI using Tailwind CSS.
+- **Search Functionality**: Search posts by title and content.
+- **Pagination**: Paginate posts for better navigation.
+
+## Screenshots
+
+### Register Page
+![Register Page](public/images/register-page.png)
+
+### Home Page
+![Home Page](public/images/home-page.png)
+
+### Admin Page
+![Admin Page](public/images/admin-page.png)
